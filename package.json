@@ -6,21 +6,33 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "db:start": "sh scripts/db-start.sh",
+    "db:stop": "sh scripts/db-stop.sh",
+    "db:logs": "sh scripts/db-logs.sh",
+    "db:reset": "sh scripts/db-reset.sh",
+    "db:psql": "psql \"${DATABASE_URL:-postgresql://dunkie:dunkie_password@localhost:5433/dunkie}\""
   },
   "dependencies": {
+    "@tailwindcss/vite": "^4.3.1",
     "next": "16.2.9",
+    "pg": "^8.22.0",
+    "postcss": "^8.5.15",
     "react": "19.2.4",
     "react-dom": "19.2.4"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "^4",
+    "@tailwindcss/postcss": "^4.3.1",
     "@types/node": "^20",
+    "@types/pg": "^8.20.0",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.2.9",
-    "tailwindcss": "^4",
+    "prettier": "^3.8.5",
+    "tailwindcss": "^4.3.1",
     "typescript": "^5"
   }
 }

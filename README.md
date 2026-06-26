@@ -1,36 +1,39 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Dunkie
+
+Blank Next.js app with PostgreSQL wired in.
 
 ## Getting Started
 
-First, run the development server:
+Run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Database
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+This project includes a local PostgreSQL database. `npm run db:start` uses Docker Compose when Docker is available; otherwise it uses local PostgreSQL binaries and stores data in `.postgres-data`.
 
-## Learn More
+```bash
+npm run db:start
+npm run dev
+```
 
-To learn more about Next.js, take a look at the following resources:
+The app reads `DATABASE_URL` from `.env.local`. The default local database URL is:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+postgresql://dunkie:dunkie_password@localhost:5433/dunkie
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Useful database commands:
 
-## Deploy on Vercel
+```bash
+npm run db:psql
+npm run db:logs
+npm run db:stop
+npm run db:reset
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The initial schema lives in `db/init/001_init.sql`. To verify app connectivity, start Postgres and visit [http://localhost:3000/api/db-health](http://localhost:3000/api/db-health).
